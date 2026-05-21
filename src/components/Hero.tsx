@@ -1,5 +1,23 @@
 import { ArrowRight, Play, Star } from 'lucide-react';
 
+const HERO_PHOTOS = [
+  {
+    src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&h=120&fit=crop&crop=face',
+    name: 'Alex Morgan',
+    role: 'CEO & Co-founder',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&h=120&fit=crop&crop=face',
+    name: 'Sara Chen',
+    role: 'Head of Product',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&h=120&fit=crop&crop=face',
+    name: 'Jordan Lee',
+    role: 'Lead Engineer',
+  },
+];
+
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-24 pb-16 overflow-hidden">
@@ -89,6 +107,50 @@ export default function Hero() {
             </div>
             Watch demo
           </button>
+        </div>
+
+        {/* Heroes of Luminary */}
+        <div className="mb-16 animate-slide-up" style={{ animationDelay: '0.25s', opacity: 0 }}>
+          <p className="text-xs uppercase tracking-widest text-gray-500 font-semibold mb-6">Heroes of Luminary</p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+            {HERO_PHOTOS.map((person, idx) => (
+              <div
+                key={idx}
+                className="flex flex-col items-center gap-3 group"
+              >
+                {/* Avatar ring */}
+                <div className="relative">
+                  <div
+                    className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    style={{
+                      background: 'linear-gradient(135deg, #6366f1, #c084fc)',
+                      padding: '2px',
+                      borderRadius: '9999px',
+                      filter: 'blur(8px)',
+                    }}
+                  />
+                  <div
+                    className="w-20 h-20 rounded-full p-[2px] transition-transform duration-300 group-hover:scale-105"
+                    style={{
+                      background: 'linear-gradient(135deg, #6366f1, #c084fc)',
+                    }}
+                  >
+                    <img
+                      src={person.src}
+                      alt={person.name}
+                      className="w-full h-full rounded-full object-cover bg-[#16162a]"
+                    />
+                  </div>
+                  {/* Online dot */}
+                  <span className="absolute bottom-0.5 right-0.5 w-3.5 h-3.5 rounded-full bg-emerald-400 border-2 border-[#0f0f1a] block" />
+                </div>
+                <div className="text-center">
+                  <p className="text-sm font-semibold text-gray-200 group-hover:text-white transition-colors">{person.name}</p>
+                  <p className="text-xs text-gray-500">{person.role}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Hero Dashboard Mockup */}
