@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Menu, X, Zap } from 'lucide-react';
 import clsx from 'clsx';
 
@@ -10,11 +11,11 @@ const navLinks = [
 ];
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState<boolean>(false);
+  const [mobileOpen, setMobileOpen] = useState<boolean>(false);
 
   useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 20);
+    const handler = (): void => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handler);
     return () => window.removeEventListener('scroll', handler);
   }, []);
@@ -46,6 +47,12 @@ export default function Navbar() {
               {link.label}
             </a>
           ))}
+          <Link
+            to="/ats"
+            className="text-gray-400 hover:text-white text-sm font-medium transition-colors duration-200"
+          >
+            ATS
+          </Link>
         </nav>
 
         {/* CTA Buttons */}
@@ -56,12 +63,12 @@ export default function Navbar() {
           >
             Log in
           </a>
-          <a
-            href="#pricing"
+          <Link
+            to="/ats"
             className="gradient-bg text-white text-sm font-semibold px-5 py-2.5 rounded-lg hover:opacity-90 transition-opacity duration-200 shadow-lg"
           >
-            Get Started
-          </a>
+            Open ATS
+          </Link>
         </div>
 
         {/* Mobile Menu Toggle */}
@@ -88,11 +95,18 @@ export default function Navbar() {
                 {link.label}
               </a>
             ))}
+            <Link
+              to="/ats"
+              className="text-gray-300 hover:text-white text-sm font-medium transition-colors"
+              onClick={() => setMobileOpen(false)}
+            >
+              ATS
+            </Link>
             <div className="flex flex-col gap-2 pt-2 border-t border-white/10">
               <a href="#" className="text-sm font-medium text-gray-300 hover:text-white py-2">Log in</a>
-              <a href="#pricing" className="gradient-bg text-white text-sm font-semibold px-5 py-2.5 rounded-lg text-center">
-                Get Started
-              </a>
+              <Link to="/ats" className="gradient-bg text-white text-sm font-semibold px-5 py-2.5 rounded-lg text-center">
+                Open ATS
+              </Link>
             </div>
           </div>
         </div>
