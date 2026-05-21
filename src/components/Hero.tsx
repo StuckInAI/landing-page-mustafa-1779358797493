@@ -2,6 +2,11 @@ import { ArrowRight, Play, Star } from 'lucide-react';
 
 const HERO_PHOTOS = [
   {
+    src: 'https://sopprkucealncmlipghn.supabase.co/storage/v1/object/public/prompt-images/build-images/1779359215345-Passport-Photo.jpeg',
+    name: 'You',
+    role: 'Visionary Leader',
+  },
+  {
     src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&h=120&fit=crop&crop=face',
     name: 'Alex Morgan',
     role: 'CEO & Co-founder',
@@ -116,23 +121,31 @@ export default function Hero() {
             {HERO_PHOTOS.map((person, idx) => (
               <div
                 key={idx}
-                className="flex flex-col items-center gap-3 group"
+                className={`flex flex-col items-center gap-3 group ${idx === 0 ? 'order-first' : ''}`}
               >
                 {/* Avatar ring */}
                 <div className="relative">
                   <div
-                    className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    className={`absolute inset-0 rounded-full transition-opacity duration-300 ${
+                      idx === 0 ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+                    }`}
                     style={{
-                      background: 'linear-gradient(135deg, #6366f1, #c084fc)',
+                      background: idx === 0
+                        ? 'linear-gradient(135deg, #f59e0b, #6366f1, #c084fc)'
+                        : 'linear-gradient(135deg, #6366f1, #c084fc)',
                       padding: '2px',
                       borderRadius: '9999px',
                       filter: 'blur(8px)',
                     }}
                   />
                   <div
-                    className="w-20 h-20 rounded-full p-[2px] transition-transform duration-300 group-hover:scale-105"
+                    className={`rounded-full p-[2px] transition-transform duration-300 group-hover:scale-105 ${
+                      idx === 0 ? 'w-24 h-24 scale-105' : 'w-20 h-20'
+                    }`}
                     style={{
-                      background: 'linear-gradient(135deg, #6366f1, #c084fc)',
+                      background: idx === 0
+                        ? 'linear-gradient(135deg, #f59e0b, #6366f1, #c084fc)'
+                        : 'linear-gradient(135deg, #6366f1, #c084fc)',
                     }}
                   >
                     <img
@@ -143,10 +156,18 @@ export default function Hero() {
                   </div>
                   {/* Online dot */}
                   <span className="absolute bottom-0.5 right-0.5 w-3.5 h-3.5 rounded-full bg-emerald-400 border-2 border-[#0f0f1a] block" />
+                  {/* Crown for first hero */}
+                  {idx === 0 && (
+                    <span className="absolute -top-2 left-1/2 -translate-x-1/2 text-lg">👑</span>
+                  )}
                 </div>
                 <div className="text-center">
-                  <p className="text-sm font-semibold text-gray-200 group-hover:text-white transition-colors">{person.name}</p>
-                  <p className="text-xs text-gray-500">{person.role}</p>
+                  <p className={`text-sm font-semibold transition-colors ${
+                    idx === 0 ? 'text-white text-base' : 'text-gray-200 group-hover:text-white'
+                  }`}>{person.name}</p>
+                  <p className={`text-xs ${
+                    idx === 0 ? 'text-[#818cf8] font-medium' : 'text-gray-500'
+                  }`}>{person.role}</p>
                 </div>
               </div>
             ))}
